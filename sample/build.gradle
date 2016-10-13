@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.talview.medialibtester"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -26,5 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile project(':library')
+    compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
     testCompile 'junit:junit:4.12'
 }

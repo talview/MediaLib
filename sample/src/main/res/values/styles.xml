@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="App">
+
+    </style>
+
+    <style name="App.Button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="App.Button.Green">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#000</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
 </resources>

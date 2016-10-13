@@ -1,0 +1,112 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="20dp"
+              tools:context="com.talview.medialibtester.HwTestActivity">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp">
+
+        <FrameLayout
+            android:id="@+id/layout_hw_test_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone">
+
+            <SurfaceView
+                android:id="@+id/holder_transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:visibility="visible"/>
+
+            <SurfaceView
+                android:id="@+id/frame_hw_camera_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="1dp">
+
+            </SurfaceView>
+
+            <VideoView
+                android:id="@+id/surface_for_player"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/img_hw_test_rec"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="10dp"
+                android:clickable="false"
+                android:padding="5dp"
+                android:visibility="gone"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/img_hw_test_repeat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:padding="5dp"
+                android:visibility="invisible"
+                tools:ignore="ContentDescription"/>>
+
+        </FrameLayout>
+    </TableRow>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/btn_test_camera"
+            style="@style/App.Button.Green"
+            android:text="@string/test_camera"/>
+
+        <Button
+            android:id="@+id/btn_test_detecting"
+            style="@style/App.Button.Green"
+            android:enabled="false"
+            android:text="@string/detecting"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_test_playback"
+            style="@style/App.Button.Green"
+            android:text="@string/playback"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_test_playing"
+            style="@style/App.Button.Green"
+            android:enabled="false"
+            android:text="@string/playing"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_test_recording"
+            style="@style/App.Button.Green"
+            android:enabled="false"
+            android:text="@string/recording"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+</LinearLayout>
