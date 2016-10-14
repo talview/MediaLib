@@ -9,4 +9,5 @@
     <string name="retry_or_continue_face_detect">Retry face detection?</string>
     <string name="hwtest_facedetectionerroralert_skip">Skip</string>
     <string name="retry">Retry</string>
+    <string name="repeat">Repeat</string>
 </resources>

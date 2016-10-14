@@ -37,7 +37,7 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class HwTestActivity extends AppCompatActivity implements HwTestView {
-    private Button testCameraBtn, detectingBtn, playbackBtn, playingBtn, recordingBtn;
+    private Button testCameraBtn, detectingBtn, playbackBtn, playingBtn, recordingBtn, testRepeat;
 
     TalviewVideo talviewVideo;
 
@@ -46,7 +46,6 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     private VideoView playerSurface;
     private Canvas faceDetectCanvas;
     private SurfaceHolder holderTransparent;
-    private ImageView recordImg, testRepeatImg;
     private AlertDialog faceDetectErrorDialog;
     private FrameLayout frameHwTestView;
 
@@ -72,9 +71,8 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
         playingBtn = (Button) findViewById(R.id.btn_test_playing);
         detectingBtn = (Button) findViewById(R.id.btn_test_detecting);
         recordingBtn = (Button) findViewById(R.id.btn_test_recording);
+        testRepeat = (Button) findViewById(R.id.btn_test_repeat);
 
-        recordImg = (ImageView) findViewById(R.id.img_hw_test_rec);
-        testRepeatImg = (ImageView) findViewById(R.id.img_hw_test_repeat);
         frameHwTestView = (FrameLayout) findViewById(R.id.layout_hw_test_camera);
         setVisibilityOfBtn(BTN_TEST_CAMERA);
 
@@ -85,7 +83,6 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
                         .onTestStartButtonClickedWithCheck(HwTestActivity.this);
             }
         });
-        testCameraBtn.setClickable(false);
 
         playbackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,19 +93,17 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
             }
         });
 
-        testRepeatImg.setOnClickListener(new View.OnClickListener() {
+        testRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testRepeatImg.setVisibility(View.GONE);
+                testRepeat.setVisibility(View.GONE);
                 reset();
             }
         });
-        testCameraBtn.setClickable(true);
     }
 
     @NeedsPermission({
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.MODIFY_AUDIO_SETTINGS,
@@ -122,7 +117,6 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
 
     @OnPermissionDenied({
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.MODIFY_AUDIO_SETTINGS,
@@ -186,7 +180,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
             faceDetectErrorDialog = null;
         }
         setVisibilityOfBtn(BTN_TEST_CAMERA);
-        testRepeatImg.setVisibility(View.GONE);
+        testRepeat.setVisibility(View.GONE);
         playerSurface.setVisibility(View.INVISIBLE);
         cameraPreviewSurface.setVisibility(View.VISIBLE);
         frameHwTestView.setVisibility(View.GONE);
@@ -225,6 +219,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
         playingBtn.setVisibility(View.GONE);
         playbackBtn.setVisibility(View.GONE);
         recordingBtn.setVisibility(View.GONE);
+        testRepeat.setVisibility(View.GONE);
         switch (which) {
             case 0:
                 testCameraBtn.setVisibility(View.VISIBLE);
@@ -242,6 +237,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
                 recordingBtn.setVisibility(View.VISIBLE);
                 break;
             case 5:
+                testRepeat.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -261,14 +257,12 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     @Override
     public void publishRecordingFinished(File recordedFile) {
         setVisibilityOfBtn(BTN_PLAYBACK);
-        recordImg.setVisibility(View.GONE);
     }
 
     @Override
     public void publishRecordingStarted() {
         setVisibilityOfBtn(BTN_RECORDING);
         transparentView.setVisibility(View.INVISIBLE);
-        recordImg.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -284,7 +278,6 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     @Override
     public void publishPlayerFinished() {
         setVisibilityOfBtn(BTN_CONTINUE);
-        testRepeatImg.setVisibility(View.VISIBLE);
     }
 
     @Override

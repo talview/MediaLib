@@ -46,28 +46,6 @@
                 android:layout_gravity="center_horizontal"
                 android:visibility="invisible"/>
 
-            <ImageView
-                android:id="@+id/img_hw_test_rec"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="top|end"
-                android:layout_margin="10dp"
-                android:clickable="false"
-                android:padding="5dp"
-                android:visibility="gone"
-                tools:ignore="ContentDescription"/>
-
-            <ImageView
-                android:id="@+id/img_hw_test_repeat"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom|start"
-                android:layout_margin="10dp"
-                android:clickable="true"
-                android:padding="5dp"
-                android:visibility="invisible"
-                tools:ignore="ContentDescription"/>>
-
         </FrameLayout>
     </TableRow>
 
@@ -92,6 +70,12 @@
             android:id="@+id/btn_test_playback"
             style="@style/App.Button.Green"
             android:text="@string/playback"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_test_repeat"
+            style="@style/App.Button.Green"
+            android:text="@string/repeat"
             android:visibility="gone"/>
 
         <Button
