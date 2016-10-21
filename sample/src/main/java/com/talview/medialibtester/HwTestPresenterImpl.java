@@ -19,7 +19,7 @@ import java.io.IOException;
  * A {@link HwTestPresenter} implementation.
  */
 class HwTestPresenterImpl implements HwTestPresenter {
-    private static final int FACE_DETECT_DURATION = 5000;
+    private static final int FACE_DETECT_DURATION = 100;
     private static final int RECORD_DURATION = 5000;
     private Rect emptyRect = new Rect(0, 0, 0, 0);
     private boolean isFaceDetected = false;
@@ -85,7 +85,8 @@ class HwTestPresenterImpl implements HwTestPresenter {
         }, FACE_DETECT_DURATION);
     }
 
-    private void recordForRecordDuration(final TalviewVideo talviewVideo) {
+    @Override
+    public void recordForRecordDuration(final TalviewVideo talviewVideo) {
         startRecording(talviewVideo);
         new Handler().postDelayed(new Runnable() {
             @Override

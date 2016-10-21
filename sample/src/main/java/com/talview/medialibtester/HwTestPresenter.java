@@ -20,6 +20,8 @@ interface HwTestPresenter extends Camera.FaceDetectionListener, MediaPlayerCallb
 
     void startRecordingAfter5Secs(TalviewVideo talviewVideo);
 
+    void recordForRecordDuration(final TalviewVideo talviewVideo);
+
     void onSkipFaceDetection(TalviewVideo video);
 
     void playVideo(TalviewVideo talviewVideo, SurfaceHolder display);

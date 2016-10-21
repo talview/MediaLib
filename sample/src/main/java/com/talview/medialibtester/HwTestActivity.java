@@ -46,7 +46,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     private VideoView playerSurface;
     private Canvas faceDetectCanvas;
     private SurfaceHolder holderTransparent;
-    private AlertDialog faceDetectErrorDialog;
+    AlertDialog faceDetectErrorDialog;
     private FrameLayout frameHwTestView;
 
     HwTestPresenter presenter;
