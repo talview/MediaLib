@@ -20,13 +20,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.VideoView;
 
+import com.talview.medialib.TalviewMedia;
 import com.talview.medialib.config.ConfigurationBuilder;
 import com.talview.medialib.video.MediaPlayerException;
 import com.talview.medialib.video.TalviewVideo;
-import com.talview.medialib.video.TalviewVideoImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -330,7 +329,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     }
 
     protected final void injectMembers() {
-        talviewVideo = new TalviewVideoImpl(new ConfigurationBuilder()
+        talviewVideo = TalviewMedia.createFromConfig(new ConfigurationBuilder()
                 .setVideoDimensions(640, 320)
                 .setAudioVideoEncodingBitRates(300000, 8000)
                 .setVideoFrameRate(8).setAudioChannels(1).setAudioSamplingRate(8000).build());
