@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.VideoView;
 
 import com.talview.medialib.video.MediaPlayerCallback;
-import com.talview.medialib.video.TalviewVideo;
+import com.talview.medialib.video.Video;
 
 /**
  * A presenter that defines the methods for presenting data in {@link HwTestActivity} properly.
@@ -18,13 +18,13 @@ interface HwTestPresenter extends Camera.FaceDetectionListener, MediaPlayerCallb
 
     Rect resizeRectToViewBounds(Rect rect, View v);
 
-    void startRecordingAfter5Secs(TalviewVideo talviewVideo);
+    void startRecordingAfter5Secs(Video video);
 
-    void recordForRecordDuration(final TalviewVideo talviewVideo);
+    void recordForRecordDuration(final Video video);
 
-    void onSkipFaceDetection(TalviewVideo video);
+    void onSkipFaceDetection(Video video);
 
-    void playVideo(TalviewVideo talviewVideo, SurfaceHolder display);
+    void playVideo(Video video, SurfaceHolder display);
 
     void playVideo(final VideoView videoView);
 

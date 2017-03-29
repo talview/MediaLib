@@ -22,10 +22,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
-import com.talview.medialib.TalviewMedia;
+import com.talview.medialib.Media;
 import com.talview.medialib.config.ConfigurationBuilder;
 import com.talview.medialib.video.MediaPlayerException;
-import com.talview.medialib.video.TalviewVideo;
+import com.talview.medialib.video.Video;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +38,7 @@ import permissions.dispatcher.RuntimePermissions;
 public class HwTestActivity extends AppCompatActivity implements HwTestView {
     private Button testCameraBtn, detectingBtn, playbackBtn, playingBtn, recordingBtn, testRepeat;
 
-    TalviewVideo talviewVideo;
+    Video video;
 
     private SurfaceView cameraPreviewSurface;
     private SurfaceView transparentView;
@@ -57,8 +57,8 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
         injectMembers();
 
         cameraPreviewSurface = (SurfaceView) findViewById(R.id.frame_hw_camera_preview);
-        talviewVideo.setCameraPreviewSurface(cameraPreviewSurface);
-        talviewVideo.setFaceDetectionListener(presenter);
+        video.setCameraPreviewSurface(cameraPreviewSurface);
+        video.setFaceDetectionListener(presenter);
 
         playerSurface = (VideoView) findViewById(R.id.surface_for_player);
         transparentView = (SurfaceView) findViewById(R.id.holder_transparent);
@@ -140,12 +140,12 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     public void startTest() {
         setVisibilityOfBtn(BTN_DETECTING_FACE);
         try {
-            talviewVideo.startCameraPreview();
+            video.startCameraPreview();
         } catch (IOException e) {
             // TODO: add crashlytics log here.
             return;
         }
-        presenter.startRecordingAfter5Secs(talviewVideo);
+        presenter.startRecordingAfter5Secs(video);
         transparentView.setVisibility(View.VISIBLE);
     }
 
@@ -169,7 +169,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
 
     private void reset() {
         try {
-            talviewVideo.close();
+            video.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -283,8 +283,8 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.destroy();
-        talviewVideo.destroy();
-        talviewVideo = null;
+        video.destroy();
+        video = null;
     }
 
     @Override
@@ -313,7 +313,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
         dialogBuilder.setPositiveButton(R.string.hwtest_facedetectionerroralert_skip, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                presenter.onSkipFaceDetection(talviewVideo);
+                presenter.onSkipFaceDetection(video);
             }
         });
         dialogBuilder.setNegativeButton(R.string.retry, new DialogInterface.OnClickListener() {
@@ -329,7 +329,7 @@ public class HwTestActivity extends AppCompatActivity implements HwTestView {
     }
 
     protected final void injectMembers() {
-        talviewVideo = TalviewMedia.createFromConfig(new ConfigurationBuilder()
+        video = Media.createFromConfig(new ConfigurationBuilder()
                 .setVideoDimensions(640, 320)
                 .setAudioVideoEncodingBitRates(300000, 8000)
                 .setVideoFrameRate(8).setAudioChannels(1).setAudioSamplingRate(8000).build());

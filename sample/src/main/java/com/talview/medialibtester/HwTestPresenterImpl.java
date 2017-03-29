@@ -4,13 +4,12 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.VideoView;
 
 import com.talview.medialib.video.MediaPlayerException;
-import com.talview.medialib.video.TalviewVideo;
+import com.talview.medialib.video.Video;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +68,7 @@ class HwTestPresenterImpl implements HwTestPresenter {
     }
 
     @Override
-    public void startRecordingAfter5Secs(final TalviewVideo talviewVideo) {
+    public void startRecordingAfter5Secs(final Video video) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -80,20 +79,20 @@ class HwTestPresenterImpl implements HwTestPresenter {
                     view.publishFaceDetectionFailed();
                     return;
                 }
-                recordForRecordDuration(talviewVideo);
+                recordForRecordDuration(video);
             }
         }, FACE_DETECT_DURATION);
     }
 
     @Override
-    public void recordForRecordDuration(final TalviewVideo talviewVideo) {
-        startRecording(talviewVideo);
+    public void recordForRecordDuration(final Video video) {
+        startRecording(video);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (view != null) {
                     try {
-                        recordedFile = talviewVideo.stopRecording();
+                        recordedFile = video.stopRecording();
                         view.publishRecordingFinished(recordedFile);
                     } catch (IOException e) {
                         view.publishError(HwTestView.ErrorCode.ERROR_GETTING_DATA_FROM_RECORDER);
@@ -103,7 +102,7 @@ class HwTestPresenterImpl implements HwTestPresenter {
         }, RECORD_DURATION);
     }
 
-    private void startRecording(TalviewVideo video) {
+    private void startRecording(Video video) {
         try {
             recordedFile = fileUtils.createNewMp4FileWithRandomName();
             video.startRecording(recordedFile);
@@ -114,13 +113,13 @@ class HwTestPresenterImpl implements HwTestPresenter {
     }
 
     @Override
-    public void onSkipFaceDetection(final TalviewVideo video) {
+    public void onSkipFaceDetection(final Video video) {
         recordForRecordDuration(video);
     }
 
     @Override
-    public void playVideo(final TalviewVideo talviewVideo, final SurfaceHolder display) {
-        talviewVideo.prepareAndStartPlaying(recordedFile, HwTestPresenterImpl.this, display);
+    public void playVideo(final Video video, final SurfaceHolder display) {
+        video.prepareAndStartPlaying(recordedFile, HwTestPresenterImpl.this, display);
     }
 
     @Override
