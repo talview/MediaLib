@@ -11,7 +11,7 @@ Configuration config = new ConfigurationBuilder()
     // final width and height may not be same as passed here but will be close
     .setVideoDimensions(640, 320)
     .setAudioVideoEncodingBitRates(300000, 8000) // bit rate encoding values (affects quality)
-    .whichCamera(TalviewVideo.REAR_CAMERA) // .whichCamera(TalviewVideo.FRONT_CAMERA
+    .whichCamera(Video.REAR_CAMERA) // .whichCamera(Video.FRONT_CAMERA
     .previewDisplayOrientation(0) // orientation in degrees for preview frames
     .videoOrientation(0) // orientation in degrees for recorded video.
     // frame rate of the video
@@ -22,11 +22,11 @@ Configuration config = new ConfigurationBuilder()
     .build()
 ```
 
-**Create an instance of TalviewVideo using the Configuration**
+**Create an instance of Video using the Configuration**
 
-    TalviewVideo tVideo = TalviewMedia.createFromConfig(config);
+    Video tVideo = Media.createFromConfig(config);
 
-**First attach a Surface to TalviewVideo instance**
+**First attach a Surface to Video instance**
 
     tVideo.setCameraPreviewSurface(cameraPreviewSurface);
 
@@ -48,7 +48,7 @@ Then call `stopRecording()` to stop recording, this method returns the file to w
 **Once done, do the clean up!**
 Call `close()` if you just want to release the Camera for other applications and re-use it again once you're app is back.
 
-Call `destroy()` if you want to do a full clean up (i.e release the camera and detach surfacecallbacks from your preview surface), the instance of `TalviewVideo` is not guranteed to work expectedly after you call `destroy()` (might work if you re-attach the surface)
+Call `destroy()` if you want to do a full clean up (i.e release the camera and detach surfacecallbacks from your preview surface), the instance of `Video` is not guranteed to work expectedly after you call `destroy()` (might work if you re-attach the surface)
 
 ### Beta Feature
 
